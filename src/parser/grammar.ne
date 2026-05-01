@@ -49,9 +49,21 @@ Comparison
 
 Expression
   # additive expression
-  -> Expression %plus Term {% d => d[0] + d[2] %}
+  -> Expression %plus Term      
+        {% d => ({
+          type: "BinaryExpression",
+          operator: "+",
+          left: d[0],
+          right: d[2],
+     }) %}
   # subtractive expression
-  | Expression %minus Term {% d => d[0] - d[2] %}
+  | Expression %minus Term 
+        {% d => ({
+          type: "BinaryExpression",
+          operator: "-",
+          left: d[0],
+          right: d[2],
+     }) %}
   | Term {% d => d[0] %}
 
 Term
@@ -63,6 +75,10 @@ Term
 
 # atomic expression
 Factor
-  -> %number {% d => Number(d[0].value) %}
+    -> %number
+     {% d => ({
+       type: "NumberLiteral",
+       value: Number(d[0].value),
+     }) %}
   # grouped expression
   | %lparen Expression %rparen {% d => d[1] %}

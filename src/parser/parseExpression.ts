@@ -6,9 +6,11 @@ export function parseExpression(input: string) {
     const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
 
     parser.feed(input);
+    const ast = parser.results[0];
 
     return {
       ok: true,
+      ast,
       result: parser.results[0],
     };
   } catch (error) {

@@ -45,13 +45,26 @@ var grammar = {
     {"name": "Comparison", "symbols": ["Expression", (lexer.has("eq") ? {type: "eq"} : eq), "Expression"], "postprocess": d => d[0] === d[2]},
     {"name": "Comparison", "symbols": ["Expression", (lexer.has("neq") ? {type: "neq"} : neq), "Expression"], "postprocess": d => d[0] !== d[2]},
     {"name": "Comparison", "symbols": ["Expression"], "postprocess": d => d[0]},
-    {"name": "Expression", "symbols": ["Expression", (lexer.has("plus") ? {type: "plus"} : plus), "Term"], "postprocess": d => d[0] + d[2]},
-    {"name": "Expression", "symbols": ["Expression", (lexer.has("minus") ? {type: "minus"} : minus), "Term"], "postprocess": d => d[0] - d[2]},
+    {"name": "Expression", "symbols": ["Expression", (lexer.has("plus") ? {type: "plus"} : plus), "Term"], "postprocess":  d => ({
+             type: "BinaryExpression",
+             operator: "+",
+             left: d[0],
+             right: d[2],
+        }) },
+    {"name": "Expression", "symbols": ["Expression", (lexer.has("minus") ? {type: "minus"} : minus), "Term"], "postprocess":  d => ({
+             type: "BinaryExpression",
+             operator: "-",
+             left: d[0],
+             right: d[2],
+        }) },
     {"name": "Expression", "symbols": ["Term"], "postprocess": d => d[0]},
     {"name": "Term", "symbols": ["Term", (lexer.has("times") ? {type: "times"} : times), "Factor"], "postprocess": d => d[0] * d[2]},
     {"name": "Term", "symbols": ["Term", (lexer.has("divide") ? {type: "divide"} : divide), "Factor"], "postprocess": d => d[0] / d[2]},
     {"name": "Term", "symbols": ["Factor"], "postprocess": d => d[0]},
-    {"name": "Factor", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess": d => Number(d[0].value)},
+    {"name": "Factor", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess":  d => ({
+          type: "NumberLiteral",
+          value: Number(d[0].value),
+        }) },
     {"name": "Factor", "symbols": [(lexer.has("lparen") ? {type: "lparen"} : lparen), "Expression", (lexer.has("rparen") ? {type: "rparen"} : rparen)], "postprocess": d => d[1]}
 ]
   , ParserStart: "Main"
