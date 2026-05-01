@@ -1,5 +1,6 @@
 import nearley from "nearley";
 import grammar from "./grammar.js";
+import { evaluate } from "./evaluate";
 
 export function parseExpression(input: string) {
   try {
@@ -11,7 +12,7 @@ export function parseExpression(input: string) {
     return {
       ok: true,
       ast,
-      result: parser.results[0],
+      result: evaluate(ast),
     };
   } catch (error) {
     return {
