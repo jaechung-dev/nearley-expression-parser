@@ -80,4 +80,32 @@ describe("AST generation", () => {
       });
     }
   });
+  it("creates comparison expression nodes", () => {
+    const parsed = parseExpression("1 + 2 = 3");
+
+    expect(parsed.ok).toBe(true);
+
+    if (parsed.ok) {
+      expect(parsed.ast).toEqual({
+        type: "ComparisonExpression",
+        operator: "=",
+        left: {
+          type: "BinaryExpression",
+          operator: "+",
+          left: {
+            type: "NumberLiteral",
+            value: 1,
+          },
+          right: {
+            type: "NumberLiteral",
+            value: 2,
+          },
+        },
+        right: {
+          type: "NumberLiteral",
+          value: 3,
+        },
+      });
+    }
+  });
 });

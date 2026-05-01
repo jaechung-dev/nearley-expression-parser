@@ -42,8 +42,18 @@ var grammar = {
     Lexer: lexer,
     ParserRules: [
     {"name": "Main", "symbols": ["Comparison"], "postprocess": d => d[0]},
-    {"name": "Comparison", "symbols": ["Expression", (lexer.has("eq") ? {type: "eq"} : eq), "Expression"], "postprocess": d => d[0] === d[2]},
-    {"name": "Comparison", "symbols": ["Expression", (lexer.has("neq") ? {type: "neq"} : neq), "Expression"], "postprocess": d => d[0] !== d[2]},
+    {"name": "Comparison", "symbols": ["Expression", (lexer.has("eq") ? {type: "eq"} : eq), "Expression"], "postprocess":  d => ({
+          type: "ComparisonExpression",
+          operator: "=",
+          left: d[0],
+          right: d[2],
+        }) },
+    {"name": "Comparison", "symbols": ["Expression", (lexer.has("neq") ? {type: "neq"} : neq), "Expression"], "postprocess":  d => ({
+          type: "ComparisonExpression",
+          operator: "!=",
+          left: d[0],
+          right: d[2],
+        }) },
     {"name": "Comparison", "symbols": ["Expression"], "postprocess": d => d[0]},
     {"name": "Expression", "symbols": ["Expression", (lexer.has("plus") ? {type: "plus"} : plus), "Term"], "postprocess":  d => ({
              type: "BinaryExpression",

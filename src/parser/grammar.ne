@@ -43,14 +43,27 @@ Main -> Comparison {% d => d[0] %}
 
 # comparison expression
 Comparison
-  -> Expression %eq Expression {% d => d[0] === d[2] %}
-  | Expression %neq Expression {% d => d[0] !== d[2] %}
+  -> Expression %eq Expression
+     {% d => ({
+       type: "ComparisonExpression",
+       operator: "=",
+       left: d[0],
+       right: d[2],
+     }) %}
+
+  | Expression %neq Expression
+     {% d => ({
+       type: "ComparisonExpression",
+       operator: "!=",
+       left: d[0],
+       right: d[2],
+     }) %}
   | Expression {% d => d[0] %}
 
 Expression
   # additive expression
   -> Expression %plus Term      
-        {% d => ({
+      {% d => ({
           type: "BinaryExpression",
           operator: "+",
           left: d[0],
@@ -58,7 +71,7 @@ Expression
      }) %}
   # subtractive expression
   | Expression %minus Term 
-        {% d => ({
+      {% d => ({
           type: "BinaryExpression",
           operator: "-",
           left: d[0],
