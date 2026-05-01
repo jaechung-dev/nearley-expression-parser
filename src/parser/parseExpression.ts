@@ -6,6 +6,6 @@ export function parseExpression(input: string) {
   parser.feed(input);
   return {
     ok: true,
-    result: Number(input),
+    result: parser.results[0],
   };
 }

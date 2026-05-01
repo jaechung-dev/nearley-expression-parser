@@ -41,7 +41,10 @@ lexer.next = (next => () => {
 var grammar = {
     Lexer: lexer,
     ParserRules: [
-    {"name": "Main", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess": d => d[0].value}
+    {"name": "Main", "symbols": ["Expression"], "postprocess": d => d[0]},
+    {"name": "Expression", "symbols": ["Expression", (lexer.has("plus") ? {type: "plus"} : plus), "Term"], "postprocess": d => d[0] + d[2]},
+    {"name": "Expression", "symbols": ["Term"], "postprocess": d => d[0]},
+    {"name": "Term", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess": d => Number(d[0].value)}
 ]
   , ParserStart: "Main"
 }

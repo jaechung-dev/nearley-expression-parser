@@ -38,5 +38,14 @@ lexer.next = (next => () => {
 
 @lexer lexer
 
-# temporary minimal grammar scaffold
-Main -> %number {% d => d[0].value %}
+# entry point
+Main -> Expression {% d => d[0] %}
+
+# additive expression
+Expression
+  -> Expression %plus Term {% d => d[0] + d[2] %}
+  | Term {% d => d[0] %}
+
+# lowest unit for now
+Term
+  -> %number {% d => Number(d[0].value) %}

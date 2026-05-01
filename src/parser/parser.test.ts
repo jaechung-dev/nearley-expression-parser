@@ -7,4 +7,9 @@ describe("parseExpression", () => {
     expect(parsed.ok).toBe(true);
     expect(parsed.result).toBe(835085);
   });
+  it("parses additive expression", () => {
+    const parsed = parseExpression("1+2");
+    expect(parsed.ok).toBe(true);
+    expect(parsed.result).toBe(3);
+  });
 });
