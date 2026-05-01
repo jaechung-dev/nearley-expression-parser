@@ -48,7 +48,8 @@ var grammar = {
     {"name": "Term", "symbols": ["Term", (lexer.has("times") ? {type: "times"} : times), "Factor"], "postprocess": d => d[0] * d[2]},
     {"name": "Term", "symbols": ["Term", (lexer.has("divide") ? {type: "divide"} : divide), "Factor"], "postprocess": d => d[0] / d[2]},
     {"name": "Term", "symbols": ["Factor"], "postprocess": d => d[0]},
-    {"name": "Factor", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess": d => Number(d[0].value)}
+    {"name": "Factor", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess": d => Number(d[0].value)},
+    {"name": "Factor", "symbols": [(lexer.has("lparen") ? {type: "lparen"} : lparen), "Expression", (lexer.has("rparen") ? {type: "rparen"} : rparen)], "postprocess": d => d[1]}
 ]
   , ParserStart: "Main"
 }

@@ -31,4 +31,10 @@ describe("parseExpression", () => {
     expect(parsed.ok).toBe(true);
     expect(parsed.result).toBe(6);
   });
+
+  it("supports parentheses", () => {
+    const parsed = parseExpression("2*(3+4)");
+    expect(parsed.ok).toBe(true);
+    expect(parsed.result).toBe(14);
+  });
 });

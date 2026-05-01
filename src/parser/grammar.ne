@@ -58,3 +58,5 @@ Term
 # atomic expression
 Factor
   -> %number {% d => Number(d[0].value) %}
+  # grouped expression
+  | %lparen Expression %rparen {% d => d[1] %}
