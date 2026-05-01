@@ -41,11 +41,20 @@ lexer.next = (next => () => {
 # entry point
 Main -> Expression {% d => d[0] %}
 
-# additive expression
 Expression
+  # additive expression
   -> Expression %plus Term {% d => d[0] + d[2] %}
+  # subtractive expression
+  | Expression %minus Term {% d => d[0] - d[2] %}
   | Term {% d => d[0] %}
 
-# lowest unit for now
 Term
+  # multiplicative term
+  -> Term %times Factor {% d => d[0] * d[2] %}
+  # division term
+  | Term %divide Factor {% d => d[0] / d[2] %}
+  | Factor {% d => d[0] %}
+
+# atomic expression
+Factor
   -> %number {% d => Number(d[0].value) %}

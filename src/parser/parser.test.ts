@@ -7,9 +7,28 @@ describe("parseExpression", () => {
     expect(parsed.ok).toBe(true);
     expect(parsed.result).toBe(835085);
   });
+
   it("parses additive expression", () => {
     const parsed = parseExpression("1+2");
     expect(parsed.ok).toBe(true);
     expect(parsed.result).toBe(3);
+  });
+
+  it("applies multiplication before addition", () => {
+    const parsed = parseExpression("2 * 3 + 4");
+    expect(parsed.ok).toBe(true);
+    expect(parsed.result).toBe(10);
+  });
+
+  it("supports subtraction", () => {
+    const parsed = parseExpression("10 - 3");
+    expect(parsed.ok).toBe(true);
+    expect(parsed.result).toBe(7);
+  });
+
+  it("supports division", () => {
+    const parsed = parseExpression("10 / 2 + 1");
+    expect(parsed.ok).toBe(true);
+    expect(parsed.result).toBe(6);
   });
 });
