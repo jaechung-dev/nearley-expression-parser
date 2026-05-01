@@ -39,7 +39,13 @@ lexer.next = (next => () => {
 @lexer lexer
 
 # entry point
-Main -> Expression {% d => d[0] %}
+Main -> Comparison {% d => d[0] %}
+
+# comparison expression
+Comparison
+  -> Expression %eq Expression {% d => d[0] === d[2] %}
+  | Expression %neq Expression {% d => d[0] !== d[2] %}
+  | Expression {% d => d[0] %}
 
 Expression
   # additive expression

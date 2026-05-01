@@ -37,4 +37,18 @@ describe("parseExpression", () => {
     expect(parsed.ok).toBe(true);
     expect(parsed.result).toBe(14);
   });
+
+  it("evaluates equality comparison", () => {
+    const parsed = parseExpression("1+2=3");
+
+    expect(parsed.ok).toBe(true);
+    expect(parsed.result).toBe(true);
+  });
+
+  it("evaluates inequality comparison", () => {
+    const parsed = parseExpression("2+3*2=10");
+
+    expect(parsed.ok).toBe(true);
+    expect(parsed.result).toBe(false);
+  });
 });
