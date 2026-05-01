@@ -58,8 +58,18 @@ var grammar = {
              right: d[2],
         }) },
     {"name": "Expression", "symbols": ["Term"], "postprocess": d => d[0]},
-    {"name": "Term", "symbols": ["Term", (lexer.has("times") ? {type: "times"} : times), "Factor"], "postprocess": d => d[0] * d[2]},
-    {"name": "Term", "symbols": ["Term", (lexer.has("divide") ? {type: "divide"} : divide), "Factor"], "postprocess": d => d[0] / d[2]},
+    {"name": "Term", "symbols": ["Term", (lexer.has("times") ? {type: "times"} : times), "Factor"], "postprocess":  d => ({
+          type: "BinaryExpression",
+          operator: "*",
+          left: d[0],
+          right: d[2],
+        }) },
+    {"name": "Term", "symbols": ["Term", (lexer.has("divide") ? {type: "divide"} : divide), "Factor"], "postprocess":  d => ({
+          type: "BinaryExpression",
+          operator: "/",
+          left: d[0],
+          right: d[2],
+        }) },
     {"name": "Term", "symbols": ["Factor"], "postprocess": d => d[0]},
     {"name": "Factor", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess":  d => ({
           type: "NumberLiteral",

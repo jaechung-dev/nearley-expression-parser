@@ -68,9 +68,21 @@ Expression
 
 Term
   # multiplicative term
-  -> Term %times Factor {% d => d[0] * d[2] %}
+  -> Term %times Factor
+     {% d => ({
+       type: "BinaryExpression",
+       operator: "*",
+       left: d[0],
+       right: d[2],
+     }) %}
   # division term
-  | Term %divide Factor {% d => d[0] / d[2] %}
+  | Term %divide Factor
+     {% d => ({
+       type: "BinaryExpression",
+       operator: "/",
+       left: d[0],
+       right: d[2],
+     }) %}
   | Factor {% d => d[0] %}
 
 # atomic expression

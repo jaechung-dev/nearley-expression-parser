@@ -53,4 +53,31 @@ describe("AST generation", () => {
       });
     }
   });
+  it("creates nested binary expression nodes for precedence", () => {
+    const parsed = parseExpression("1 + 2 * 3");
+
+    expect(parsed.ok).toBe(true);
+    if (parsed.ok) {
+      expect(parsed.ast).toEqual({
+        type: "BinaryExpression",
+        operator: "+",
+        left: {
+          type: "NumberLiteral",
+          value: 1,
+        },
+        right: {
+          type: "BinaryExpression",
+          operator: "*",
+          left: {
+            type: "NumberLiteral",
+            value: 2,
+          },
+          right: {
+            type: "NumberLiteral",
+            value: 3,
+          },
+        },
+      });
+    }
+  });
 });
