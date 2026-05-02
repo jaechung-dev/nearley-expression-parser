@@ -85,13 +85,24 @@ var grammar = {
           right: d[2],
         }) },
     {"name": "Term", "symbols": ["Power"], "postprocess": d => d[0]},
-    {"name": "Power", "symbols": ["Factor", (lexer.has("power") ? {type: "power"} : power), "Power"], "postprocess":  d => ({
+    {"name": "Power", "symbols": ["Unary", (lexer.has("power") ? {type: "power"} : power), "Power"], "postprocess":  d => ({
           type: "BinaryExpression",
           operator: "**",
           left: d[0],
           right: d[2],
         }) },
-    {"name": "Power", "symbols": ["Factor"], "postprocess": d => d[0]},
+    {"name": "Power", "symbols": ["Unary"], "postprocess": d => d[0]},
+    {"name": "Unary", "symbols": [(lexer.has("minus") ? {type: "minus"} : minus), "Unary"], "postprocess":  d => ({
+          type: "UnaryExpression",
+          operator: "-",
+          argument: d[1],
+        }) },
+    {"name": "Unary", "symbols": [(lexer.has("plus") ? {type: "plus"} : plus), "Unary"], "postprocess":  d => ({
+          type: "UnaryExpression",
+          operator: "+",
+          argument: d[1],
+        }) },
+    {"name": "Unary", "symbols": ["Factor"], "postprocess": d => d[0]},
     {"name": "Factor", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess":  d => ({
           type: "NumberLiteral",
           value: Number(d[0].value),

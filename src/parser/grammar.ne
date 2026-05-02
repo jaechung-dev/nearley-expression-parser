@@ -109,12 +109,27 @@ Term
 
 Power
   # right-associative exponentiation
-  -> Factor %power Power
+  -> Unary %power Power
      {% d => ({
        type: "BinaryExpression",
        operator: "**",
        left: d[0],
        right: d[2],
+     }) %}
+  | Unary {% d => d[0] %}
+
+Unary
+  -> %minus Unary
+     {% d => ({
+       type: "UnaryExpression",
+       operator: "-",
+       argument: d[1],
+     }) %}
+  | %plus Unary
+     {% d => ({
+       type: "UnaryExpression",
+       operator: "+",
+       argument: d[1],
      }) %}
 
   | Factor {% d => d[0] %}

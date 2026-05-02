@@ -5,9 +5,15 @@ export type NumberLiteralNode = {
 
 export type BinaryExpressionNode = {
   type: "BinaryExpression";
-  operator: "+" | "-" | "*" | "/";
+  operator: "+" | "-" | "*" | "/" | "**";
   left: ASTNode;
   right: ASTNode;
+};
+
+export type UnaryExpressionNode = {
+  type: "UnaryExpression";
+  operator: "-" | "+";
+  argument: ASTNode;
 };
 
 export type ComparisonExpressionNode = {
@@ -20,4 +26,5 @@ export type ComparisonExpressionNode = {
 export type ASTNode =
   | NumberLiteralNode
   | BinaryExpressionNode
-  | ComparisonExpressionNode;
+  | ComparisonExpressionNode
+  | UnaryExpressionNode;

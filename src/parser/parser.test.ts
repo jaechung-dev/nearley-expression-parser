@@ -145,4 +145,33 @@ describe("parseExpression", () => {
       expect(parsed.result).toBe(512);
     });
   });
+  describe("unary operators", () => {
+    it("supports unary minus", () => {
+      const parsed = parseExpression("-5 + 2");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(-3);
+    });
+
+    it("supports unary plus", () => {
+      const parsed = parseExpression("+5 + 2");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(7);
+    });
+
+    it("supports unary operator with grouped expressions", () => {
+      const parsed = parseExpression("-(2 + 3)");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(-5);
+    });
+
+    it("supports exponentiation with negative exponent", () => {
+      const parsed = parseExpression("5 ** -2");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(0.04);
+    });
+  });
 });
