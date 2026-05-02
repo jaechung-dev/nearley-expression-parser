@@ -1,10 +1,14 @@
 import nearley from "nearley";
-import grammar from "./grammar.js";
+import * as grammar from "./grammar";
 import { evaluate } from "./evaluate";
+
+const compiledGrammar = grammar.default ?? grammar;
 
 export function parseExpression(input: string) {
   try {
-    const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+    const parser = new nearley.Parser(
+      nearley.Grammar.fromCompiled(compiledGrammar),
+    );
 
     parser.feed(input);
     const ast = parser.results[0];

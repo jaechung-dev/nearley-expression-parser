@@ -3,6 +3,7 @@
 (function () {
 function id(x) { return x[0]; }
 
+// let Vite scan
 const moo = require("moo");
 
 // lexer converts raw input string into tokens
