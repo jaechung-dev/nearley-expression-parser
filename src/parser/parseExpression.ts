@@ -19,9 +19,14 @@ export function parseExpression(input: string) {
       result: evaluate(ast),
     };
   } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Invalid expression";
+    // remove verbose Nearley expectation dump
+    const customError = message.split("Instead, I was expecting")[0].trim();
+
     return {
       ok: false,
-      error: error instanceof Error ? error.message : "Invalid expression",
+      error: customError,
     };
   }
 }
