@@ -1,4 +1,6 @@
-export function evaluate(node: any): number | boolean {
+import type { ASTNode } from "./types";
+
+export function evaluate(node: ASTNode): number | boolean {
   if (node.type === "NumberLiteral") {
     return node.value;
   }
@@ -11,6 +13,14 @@ export function evaluate(node: any): number | boolean {
     if (node.operator === "-") return left - right;
     if (node.operator === "*") return left * right;
     if (node.operator === "/") return left / right;
+    if (node.operator === "**") return left ** right;
+  }
+
+  if (node.type === "UnaryExpression") {
+    const value = evaluate(node.argument) as number;
+
+    if (node.operator === "-") return -value;
+    if (node.operator === "+") return +value;
   }
 
   if (node.type === "ComparisonExpression") {

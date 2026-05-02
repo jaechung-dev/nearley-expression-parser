@@ -7,9 +7,12 @@ const lexer = moo.compile({
 
   // whitespace tokens
   WS: { match: /[ \t\n\r]+/, lineBreaks: true },
-  
+
   // numeric literals
   number: /[0-9]+/,
+
+  // exponentiation operator
+  power: "**",
 
   // arithmetic operators
   plus: "+",
@@ -42,7 +45,7 @@ lexer.next = (next => () => {
 # entry point
 Main -> Comparison {% d => d[0] %}
 
-# comparison expression
+# comparison expressions
 Comparison
   -> Expression %eq Expression
      {% d => ({
@@ -59,52 +62,84 @@ Comparison
        left: d[0],
        right: d[2],
      }) %}
+
   | Expression {% d => d[0] %}
 
 Expression
   # additive expression
-  -> Expression %plus Term      
-      {% d => ({
-          type: "BinaryExpression",
-          operator: "+",
-          left: d[0],
-          right: d[2],
+  -> Expression %plus Term
+     {% d => ({
+       type: "BinaryExpression",
+       operator: "+",
+       left: d[0],
+       right: d[2],
      }) %}
+
   # subtractive expression
-  | Expression %minus Term 
-      {% d => ({
-          type: "BinaryExpression",
-          operator: "-",
-          left: d[0],
-          right: d[2],
+  | Expression %minus Term
+     {% d => ({
+       type: "BinaryExpression",
+       operator: "-",
+       left: d[0],
+       right: d[2],
      }) %}
+
   | Term {% d => d[0] %}
 
 Term
-  # multiplicative term
-  -> Term %times Factor
+  # multiplicative expression
+  -> Term %times Power
      {% d => ({
        type: "BinaryExpression",
        operator: "*",
        left: d[0],
        right: d[2],
      }) %}
-  # division term
-  | Term %divide Factor
+
+  # division expression
+  | Term %divide Power
      {% d => ({
        type: "BinaryExpression",
        operator: "/",
        left: d[0],
        right: d[2],
      }) %}
+
+  | Power {% d => d[0] %}
+
+Power
+  # right-associative exponentiation
+  -> Unary %power Power
+     {% d => ({
+       type: "BinaryExpression",
+       operator: "**",
+       left: d[0],
+       right: d[2],
+     }) %}
+  | Unary {% d => d[0] %}
+
+Unary
+  -> %minus Unary
+     {% d => ({
+       type: "UnaryExpression",
+       operator: "-",
+       argument: d[1],
+     }) %}
+  | %plus Unary
+     {% d => ({
+       type: "UnaryExpression",
+       operator: "+",
+       argument: d[1],
+     }) %}
+
   | Factor {% d => d[0] %}
 
-# atomic expression
 Factor
-    -> %number
+  -> %number
      {% d => ({
        type: "NumberLiteral",
        value: Number(d[0].value),
      }) %}
+
   # grouped expression
-  | %lparen Expression %rparen {% d => d[1] %}
+  | %lparen Comparison %rparen {% d => d[1] %}

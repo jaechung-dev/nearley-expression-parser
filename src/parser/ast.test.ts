@@ -108,4 +108,66 @@ describe("AST generation", () => {
       });
     }
   });
+  it("creates right-associative exponentiation AST", () => {
+    const parsed = parseExpression("2 ** 3 ** 2");
+
+    expect(parsed.ok).toBe(true);
+
+    if (parsed.ok) {
+      expect(parsed.ast).toEqual({
+        type: "BinaryExpression",
+        operator: "**",
+        left: { type: "NumberLiteral", value: 2 },
+        right: {
+          type: "BinaryExpression",
+          operator: "**",
+          left: { type: "NumberLiteral", value: 3 },
+          right: { type: "NumberLiteral", value: 2 },
+        },
+      });
+    }
+  });
+  describe("unary expression AST", () => {
+    it("creates unary expression node", () => {
+      const parsed = parseExpression("-5");
+
+      expect(parsed.ok).toBe(true);
+
+      if (parsed.ok) {
+        expect(parsed.ast).toEqual({
+          type: "UnaryExpression",
+          operator: "-",
+          argument: {
+            type: "NumberLiteral",
+            value: 5,
+          },
+        });
+      }
+    });
+
+    it("creates unary expression node for grouped expression", () => {
+      const parsed = parseExpression("-(2 + 3)");
+
+      expect(parsed.ok).toBe(true);
+
+      if (parsed.ok) {
+        expect(parsed.ast).toEqual({
+          type: "UnaryExpression",
+          operator: "-",
+          argument: {
+            type: "BinaryExpression",
+            operator: "+",
+            left: {
+              type: "NumberLiteral",
+              value: 2,
+            },
+            right: {
+              type: "NumberLiteral",
+              value: 3,
+            },
+          },
+        });
+      }
+    });
+  });
 });
