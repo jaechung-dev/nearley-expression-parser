@@ -108,4 +108,23 @@ describe("AST generation", () => {
       });
     }
   });
+  it("creates right-associative exponentiation AST", () => {
+    const parsed = parseExpression("2 ** 3 ** 2");
+
+    expect(parsed.ok).toBe(true);
+
+    if (parsed.ok) {
+      expect(parsed.ast).toEqual({
+        type: "BinaryExpression",
+        operator: "**",
+        left: { type: "NumberLiteral", value: 2 },
+        right: {
+          type: "BinaryExpression",
+          operator: "**",
+          left: { type: "NumberLiteral", value: 3 },
+          right: { type: "NumberLiteral", value: 2 },
+        },
+      });
+    }
+  });
 });

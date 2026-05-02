@@ -122,4 +122,27 @@ describe("parseExpression", () => {
       expect(parsed.result).toBeNaN();
     });
   });
+
+  describe("exponentiation operator", () => {
+    it("supports exponentiation", () => {
+      const parsed = parseExpression("2 ** 3");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(8);
+    });
+
+    it("applies exponentiation before multiplication", () => {
+      const parsed = parseExpression("2 * 3 ** 2");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(18);
+    });
+
+    it("treats exponentiation as right-associative", () => {
+      const parsed = parseExpression("2 ** 3 ** 2");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(512);
+    });
+  });
 });

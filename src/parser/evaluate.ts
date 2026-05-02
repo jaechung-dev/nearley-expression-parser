@@ -11,6 +11,7 @@ export function evaluate(node: any): number | boolean {
     if (node.operator === "-") return left - right;
     if (node.operator === "*") return left * right;
     if (node.operator === "/") return left / right;
+    if (node.operator === "**") return left ** right;
   }
 
   if (node.type === "ComparisonExpression") {
