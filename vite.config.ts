@@ -1,7 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import commonjs from "vite-plugin-commonjs";
+import tailwindcss from "@tailwindcss/vite";
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [react(), commonjs(), tailwindcss()],
+  optimizeDeps: {
+    include: ["nearley", "moo"],
+  },
+  test: {
+    environment: "jsdom",
+  },
+});

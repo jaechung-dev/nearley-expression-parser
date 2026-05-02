@@ -1,4 +1,5 @@
 @{%
+// let Vite scan
 const moo = require("moo");
 
 // lexer converts raw input string into tokens
