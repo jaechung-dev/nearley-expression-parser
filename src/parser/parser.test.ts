@@ -98,4 +98,28 @@ describe("parseExpression", () => {
       expect(parsed.ok).toBe(false);
     });
   });
+
+  describe("additional robustness cases", () => {
+    it("handles left-associative division", () => {
+      const parsed = parseExpression("10 / 2 / 5");
+
+      expect(parsed.ok).toBe(true);
+
+      expect(parsed.result).toBe(1);
+    });
+
+    it("follows JavaScript numeric semantics for division by zero", () => {
+      const parsed = parseExpression("10 / 0");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBe(Infinity);
+    });
+
+    it("follows JavaScript numeric semantics for zero divided by zero", () => {
+      const parsed = parseExpression("0 / 0");
+
+      expect(parsed.ok).toBe(true);
+      expect(parsed.result).toBeNaN();
+    });
+  });
 });
