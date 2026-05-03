@@ -1,0 +1,408 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AST generation > 'applies exponentiation before multipl…' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "*",
+  "right": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "operator": "**",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'follows JavaScript numeric semantics …' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'follows JavaScript numeric semantics …' 2`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'handles left-associative division' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 10,
+    },
+    "operator": "/",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 5,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports exponentiation with negative…' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 5,
+  },
+  "operator": "**",
+  "right": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "-",
+    "type": "UnaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports exponentiation' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "**",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 3,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports unary minus' 1`] = `
+{
+  "left": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "operator": "-",
+    "type": "UnaryExpression",
+  },
+  "operator": "+",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports unary operator with grouped …' 1`] = `
+{
+  "argument": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "-",
+  "type": "UnaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports unary plus' 1`] = `
+{
+  "left": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "operator": "+",
+    "type": "UnaryExpression",
+  },
+  "operator": "+",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'treats exponentiation as right-associ…' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "**",
+  "right": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "operator": "**",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > undefined 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 1,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 3,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > undefined 2`] = `
+{
+  "left": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 4,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > undefined 3`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "*",
+    "right": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "operator": "+",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 4,
+      },
+      "type": "BinaryExpression",
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > undefined 4`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 6,
+  },
+  "operator": "=",
+  "right": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 10,
+      },
+      "operator": "/",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 1,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > undefined 5`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 12,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "!=",
+  "right": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 4,
+      },
+      "operator": "/",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > undefined 6`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "+",
+    "right": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > undefined 7`] = `
+{
+  "left": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 4,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "!=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
