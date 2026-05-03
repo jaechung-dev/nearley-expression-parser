@@ -95,11 +95,12 @@ There are two separate test files in the project:
 ```bash
 npm vitest run src/parser/parser.test.ts
 npm vitest run src/parser/ast.test.ts
+npm vitest run src/components/ExpressionInput.test.tsx  # UI Test
 ```
 
 ## Run Development Server
 
-````bash
+```bash
 npm run dev
 ```
 
@@ -108,8 +109,7 @@ npm run dev
 
 ## Example Expressions
 
-````
-
+```txt
 1 + 2 = 3
 2 _ 3 + 4 = 10
 2 _ (3 + 4) = 10
@@ -123,7 +123,7 @@ npm run dev
 
 ## Additional Edge Cases
 
-```
+```txt
 
 10 / 2 / 5
 10 / 0
@@ -133,7 +133,7 @@ npm run dev
 
 The evaluator currently follows standard JavaScript numeric semantics:
 
-```
+```txt
 
 10 / 0 -> Infinity
 0 / 0 -> NaN
@@ -144,7 +144,7 @@ The evaluator currently follows standard JavaScript numeric semantics:
 
 The parser flow is separated into:
 
-```
+```txt
 
 Input
 → Lexer (Moo)
@@ -168,4 +168,3 @@ With additional time, the project could be extended with:
 - Additional numeric literal support (`Infinity`, `NaN`, decimals, scientific notation)
 - Bitwise operator support (`&`, `|`, `^`, `<<`, `>>`)
 - More advanced expression validation and semantic analysis
-```
