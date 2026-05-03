@@ -4,24 +4,35 @@
 
 This project is a mathematical expression parser built with Nearley and Moo.
 
-The parser supports:
+## Features
 
-- Arithmetic expressions (`+`, `-`, `*`, `/`)
-- Comparison expressions (`=`, `!=`)
-- Operator precedence
-- Parentheses grouping
-- Abstract Syntax Tree (AST) generation
-- Expression evaluation
-- Invalid syntax detection with error location display
+- Built with Nearley and Moo
+- Supports arithmetic and comparison expressions
+- Operator precedence and parentheses support
+- AST generation and visualization
+- Real-time evaluation result
+- Error location reporting
+- Snapshot-based AST testing
+- Shared test case architecture for parser/UI consistency
 
-A React-based demo application is included to provide:
+## Supported Operators
 
-- Real-time expression parsing
-- AST visualization
-- Expression evaluation results
-- Invalid syntax feedback
+- Arithmetic: `+`, `-`, `*`, `/`, `**` |
+- Comparison: `=`, `!=` |
+- Unary: `+`, `-` |
+- Grouping: `(` `)` |
 
----
+## Bonus Features
+
+- Exponentiation operator support (`**`)
+- Right-associative exponentiation parsing
+- Unary operator support (`+x`, `-x`)
+- AST snapshot testing with Vitest
+- Visual AST tree viewer
+- Shared test case architecture across parser tests, AST snapshot tests, and UI validation console
+- Reusable UI card/viewer component structure
+- Real-time parser validation console
+- Error handling with parser location reporting
 
 ## Tech Stack
 
@@ -33,11 +44,7 @@ A React-based demo application is included to provide:
 - Vitest
 - Tailwind CSS
 
----
-
 ## Installation
-
-Install dependencies:
 
 ```bash
 npm install
@@ -49,7 +56,7 @@ Nearley generates the parser grammar as an IIFE-based CommonJS module.
 
 Because the generated grammar is wrapped inside an IIFE, ES module imports cannot be used directly inside the generated output. As a result, the grammar relies on `require(...)` statements internally.
 
-To make this work correctly within the Vite ESM environment, the project uses:
+To make this work correctly within the Vite ESM environment, the project uses `vite-plugin-commonjs`
 
 ```js
 // vite.config.ts
@@ -78,28 +85,60 @@ npm run grammar
   }
 ```
 
-## Test Structure
-
-There are two separate test files in the project:
-
-- `parser.test.ts`
-  - Tests expression parsing and evaluation behavior
-
-  - Covers arithmetic operations, comparison expressions, operator precedence, grouped expressions, invalid syntax handling, and numeric edge cases
-
-- `ast.test.ts`
-  - Tests AST generation behavior
-
-  - Verifies that the parser produces the correct AST structure for literals, binary expressions, grouped expressions, and comparison expressions
+## Run Tests
 
 ```bash
-npm vitest run src/parser/parser.test.ts
-npm vitest run src/parser/ast.test.ts
+npx vitest run src/parser/parser.test.ts
+npx vitest run src/parser/ast.test.ts
 ```
+
+## Update AST snapshots:
+
+```bash
+npx vitest -u
+```
+
+## Test Structure
+
+There are two separate test files:
+
+- parser.test.ts
+  - Tests expression parsing and evaluation behavior
+  - Covers arithmetic operations, comparison expressions, operator precedence, grouped expressions, invalid syntax handling, numeric edge cases, and bonus operators
+- ast.test.ts
+  - Tests AST generation behavior using snapshot testing
+  - Verifies AST structure for valid expressions
+
+## Test Console Validation
+
+The demo UI includes a test console that uses the same shared test case data as the Vitest parser tests.
+
+To verify that the console reflects **real parser behavior**, you can temporarily change an expected value in src/parser/testCases.ts
+
+For example,
+
+```js
+{
+  expression: "1 + 2 = 3",
+  expected: false,    //  So you changed it from true to false
+}
+```
+
+Then
+
+```bash
+npx vitest
+```
+
+![alt text](image-3.png)
+![alt text](image-4.png)
+
+The parser test should fail, and the UI validation console should also show a failed case.
+**After testing, restore the expected value**
 
 ## Run Development Server
 
-````bash
+```bash
 npm run dev
 ```
 
@@ -108,8 +147,7 @@ npm run dev
 
 ## Example Expressions
 
-````
-
+```txt
 1 + 2 = 3
 2 _ 3 + 4 = 10
 2 _ (3 + 4) = 10
@@ -118,43 +156,49 @@ npm run dev
 2 + 3 _ 2 = 10
 2 _ 3 + 4 != 10
 1 + (2 = 3
-
+2 ** 3
+2 * 3 ** 2
+2 ** 3 ** 2
+-5 + 2
++5 + 2
+-(2 + 3)
+5 ** -2
 ```
 
 ## Additional Edge Cases
 
-```
-
+```txt
 10 / 2 / 5
 10 / 0
 0 / 0
-
 ```
 
 The evaluator currently follows standard JavaScript numeric semantics:
 
-```
-
+```txt
 10 / 0 -> Infinity
 0 / 0 -> NaN
-
 ```
 
 ## Architecture Notes
 
 The parser flow is separated into:
 
-```
-
+```txt
 Input
 → Lexer (Moo)
 → Parser (Nearley)
 → AST Generation
 → AST Evaluation
-
 ```
 
 The parser first generates an AST and then evaluates the expression through a separate evaluator layer.
+
+Shared test cases are reused across:
+
+- Parser tests
+- AST snapshot tests
+- UI validation console
 
 ## Summary
 
@@ -168,4 +212,3 @@ With additional time, the project could be extended with:
 - Additional numeric literal support (`Infinity`, `NaN`, decimals, scientific notation)
 - Bitwise operator support (`&`, `|`, `^`, `<<`, `>>`)
 - More advanced expression validation and semantic analysis
-```
