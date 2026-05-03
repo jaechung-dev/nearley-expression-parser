@@ -142,19 +142,17 @@ The parser test should fail, and the UI validation console should also show a fa
 npm run dev
 ```
 
-![Parser demo UI](image.png)
-![AST visualization and error handling](image-1.png)
 
 ## Example Expressions
 
 ```txt
 1 + 2 = 3
-2 _ 3 + 4 = 10
-2 _ (3 + 4) = 10
+2 * 3 + 4 = 10
+2 * (3 + 4) = 10
 6 = 10 / 2 + 1
 12 + 3 != 4 / 2 + 5
-2 + 3 _ 2 = 10
-2 _ 3 + 4 != 10
+2 + 3 * 2 = 10
+2 * 3 + 4 != 10
 1 + (2 = 3
 2 ** 3
 2 * 3 ** 2
