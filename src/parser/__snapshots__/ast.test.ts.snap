@@ -1,0 +1,815 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AST generation > 'applies exponentiation before multipl…' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "*",
+  "right": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "operator": "**",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'evaluates "1 + 2 = 3" to true' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 1,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 3,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'evaluates "2 * (3 + 4) = 10" to false' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "*",
+    "right": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "operator": "+",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 4,
+      },
+      "type": "BinaryExpression",
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'evaluates "2 * 3 + 4 != 10" to false' 1`] = `
+{
+  "left": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 4,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "!=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'evaluates "2 * 3 + 4 = 10" to true' 1`] = `
+{
+  "left": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 4,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'evaluates "2 + 3 * 2 = 10" to false' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "+",
+    "right": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'evaluates "6 = 10 / 2 + 1" to true' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 6,
+  },
+  "operator": "=",
+  "right": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 10,
+      },
+      "operator": "/",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 1,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'evaluates "12 + 3 != 4 / 2 + 5" to tr…' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 12,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "!=",
+  "right": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 4,
+      },
+      "operator": "/",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'follows JavaScript numeric semantics …' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'follows JavaScript numeric semantics …' 2`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'handles left-associative division' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 10,
+    },
+    "operator": "/",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 5,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "+5 + 2"' 1`] = `
+{
+  "left": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "operator": "+",
+    "type": "UnaryExpression",
+  },
+  "operator": "+",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "-(2 + 3)"' 1`] = `
+{
+  "argument": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "-",
+  "type": "UnaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "-5 + 2"' 1`] = `
+{
+  "left": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "operator": "-",
+    "type": "UnaryExpression",
+  },
+  "operator": "+",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "0 / 0"' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "1 + 2 = 3"' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 1,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 3,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "2 * (3 + 4) = 10"' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "*",
+    "right": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "operator": "+",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 4,
+      },
+      "type": "BinaryExpression",
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "2 * 3 ** 2"' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "*",
+  "right": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "operator": "**",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "2 * 3 + 4 != 10"' 1`] = `
+{
+  "left": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 4,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "!=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "2 * 3 + 4 = 10"' 1`] = `
+{
+  "left": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 4,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "2 ** 3 ** 2"' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "**",
+  "right": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "operator": "**",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "2 ** 3"' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "**",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 3,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "2 + 3 * 2 = 10"' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "+",
+    "right": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 3,
+      },
+      "operator": "*",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "=",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "5 ** -2"' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 5,
+  },
+  "operator": "**",
+  "right": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "-",
+    "type": "UnaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "6 = 10 / 2 + 1"' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 6,
+  },
+  "operator": "=",
+  "right": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 10,
+      },
+      "operator": "/",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 1,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "10 / 0"' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 10,
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 0,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "10 / 2 / 5"' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 10,
+    },
+    "operator": "/",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "/",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 5,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'snapshots AST for "12 + 3 != 4 / 2 + …' 1`] = `
+{
+  "left": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 12,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "!=",
+  "right": {
+    "left": {
+      "left": {
+        "type": "NumberLiteral",
+        "value": 4,
+      },
+      "operator": "/",
+      "right": {
+        "type": "NumberLiteral",
+        "value": 2,
+      },
+      "type": "BinaryExpression",
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "ComparisonExpression",
+}
+`;
+
+exports[`AST generation > 'supports exponentiation with negative…' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 5,
+  },
+  "operator": "**",
+  "right": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "-",
+    "type": "UnaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports exponentiation' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "**",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 3,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports unary minus' 1`] = `
+{
+  "left": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "operator": "-",
+    "type": "UnaryExpression",
+  },
+  "operator": "+",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports unary operator with grouped …' 1`] = `
+{
+  "argument": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "operator": "+",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "type": "BinaryExpression",
+  },
+  "operator": "-",
+  "type": "UnaryExpression",
+}
+`;
+
+exports[`AST generation > 'supports unary plus' 1`] = `
+{
+  "left": {
+    "argument": {
+      "type": "NumberLiteral",
+      "value": 5,
+    },
+    "operator": "+",
+    "type": "UnaryExpression",
+  },
+  "operator": "+",
+  "right": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "type": "BinaryExpression",
+}
+`;
+
+exports[`AST generation > 'treats exponentiation as right-associ…' 1`] = `
+{
+  "left": {
+    "type": "NumberLiteral",
+    "value": 2,
+  },
+  "operator": "**",
+  "right": {
+    "left": {
+      "type": "NumberLiteral",
+      "value": 3,
+    },
+    "operator": "**",
+    "right": {
+      "type": "NumberLiteral",
+      "value": 2,
+    },
+    "type": "BinaryExpression",
+  },
+  "type": "BinaryExpression",
+}
+`;

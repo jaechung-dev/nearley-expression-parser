@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import { parseExpression } from "./parser/parseExpression";
 import { ExpressionInput } from "./components/ExpressionInput";
-import { ResultPanel } from "./components/ResultPanel";
-import { AstViewer } from "./components/AstViewer";
+import { JsonAstViewer } from "./components/JsonAstViewer";
+import { VisualAstViewer } from "./components/VisualAstViewer";
+import { ConsoleViewer } from "./components/ConsoleViewer";
+import { TitleBar } from "./components/TitleBar";
 
 function App() {
   const [input, setInput] = useState("1 + 2 = 3");
@@ -10,38 +12,47 @@ function App() {
   const parsed = useMemo(() => parseExpression(input), [input]);
 
   return (
-    <main className="min-h-screen bg-zinc-100 px-6 py-10 text-[rgb(68,68,68)]">
-      <section className="mx-auto max-w-5xl">
-        <header className="mb-8 border-l-4 border-[rgb(237,28,36)] bg-white p-6 shadow-sm">
-          <p className="text-sm uppercase tracking-wide text-[rgb(237,28,36)]">
-            Nearley + Moo
-          </p>
-          <h1 className="mt-2 text-4xl font-semibold">Expression Parser</h1>
-          <p className="mt-3 text-lg">
-            Parse mathematical expressions, inspect the AST, and evaluate
-            boolean statements.
-          </p>
-        </header>
+    <main className="min-h-screen bg-zinc-100 px-6 py-8 text-[rgb(68,68,68)]">
+      <section className="mx-auto max-w-6xl">
+        <TitleBar />
 
-        <section aria-label="Expression input section" className="mt-6">
+        <section aria-label="Expression input and result" className="mt-5">
           <ExpressionInput
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            resultText={
+              parsed.ok ? String(parsed.result) : "Invalid expression"
+            }
+            isValid={parsed.ok}
+            onChange={(event) => setInput(event.target.value)}
           />
         </section>
+
+        {!parsed.ok && (
+          <section
+            aria-live="polite"
+            className="mt-4 rounded-md border border-red-200 bg-red-50 p-4 font-mono text-sm font-semibold whitespace-pre-wrap text-[rgb(237,28,36)]"
+          >
+            {parsed.error}
+          </section>
+        )}
 
         <section
-          aria-label="Parser output section"
-          className="mt-6 grid gap-6 lg:grid-cols-[320px_1fr]"
+          aria-label="AST inspection section"
+          className="mt-5 flex flex-col gap-5 xl:flex-row"
         >
-          <ResultPanel
+          <JsonAstViewer
+            className="min-w-[420px] shrink-0  flex-1"
             ok={parsed.ok}
-            result={parsed.result}
-            error={parsed.error}
+            ast={parsed.ast}
           />
-
-          <AstViewer ok={parsed.ok} ast={parsed.ast} />
+          <VisualAstViewer
+            className="min-w-[420px] shrink-0  flex-1"
+            ok={parsed.ok}
+            ast={parsed.ast}
+          />
         </section>
+
+        <ConsoleViewer />
       </section>
     </main>
   );

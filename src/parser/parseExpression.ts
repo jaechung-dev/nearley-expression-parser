@@ -13,6 +13,13 @@ export function parseExpression(input: string) {
     parser.feed(input);
     const ast = parser.results[0];
 
+    if (!ast) {
+      return {
+        ok: false,
+        error: "Invalid expression",
+      };
+    }
+
     return {
       ok: true,
       ast,
